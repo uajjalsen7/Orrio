@@ -17,10 +17,9 @@ class LoginViewModel @Inject constructor(
 
     private val _loginResponse= MutableLiveData<DataState<UserLogIn>>()
     val loginResponse : LiveData<DataState<UserLogIn>> =_loginResponse
+
     fun userLogin(userLogin: UserLogIn){
         _loginResponse.postValue(DataState.Loading())
-
-
 
         authService.userLogin(userLogin).addOnSuccessListener {
             _loginResponse.postValue(DataState.Success(userLogin))

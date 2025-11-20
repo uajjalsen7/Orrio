@@ -7,9 +7,11 @@ import androidx.navigation.fragment.findNavController
 import com.project1forcreativeitinstitute.orrio.R
 import com.project1forcreativeitinstitute.orrio.base.BaseFragment
 import com.project1forcreativeitinstitute.orrio.core.DataState
+import com.project1forcreativeitinstitute.orrio.data.models.UserLogIn
 import com.project1forcreativeitinstitute.orrio.databinding.FragmentLoginBinding
 import com.project1forcreativeitinstitute.orrio.isEmpty
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 @AndroidEntryPoint
  class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
@@ -18,11 +20,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
           with(binding){
+
               btnLogin.setOnClickListener {
                   etEmail.isEmpty()
                   etPassword.isEmpty()
                   if (!etEmail.isEmpty() && !etPassword.isEmpty()){
-                      Toast.makeText(context,"All input done....", Toast.LENGTH_LONG).show()
+                      
+                      val user = UserLogIn(etEmail.text.toString() , etPassword.text.toString())
+
+                      viewModel.userLogin(user)
                   }
               }
               btnRegister.setOnClickListener {
@@ -36,27 +42,27 @@ import dagger.hilt.android.AndroidEntryPoint
 
      override fun allObserver() {
 
+         loginResponse()
 
      }
     private fun loginResponse() {
 
         viewModel.loginResponse.observe(viewLifecycleOwner) {
             when (it) {
-                is DataState.Error<*> -> {
+                is DataState.Error -> {
                     loading.dismiss()
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
 
-                is DataState.Loading<*> -> {
+                is DataState.Loading -> {
                     loading.show()
                     Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
                 }
 
-                is DataState.Success<*> -> {
+                is DataState.Success -> {
                     loading.dismiss()
-                    Toast.makeText(context, "Login Successful:${it.data}", Toast.LENGTH_SHORT)
-                        .show()
-                    findNavController().navigate(R.id.action_loginFragment_to_dasbordFragment)
+                    Toast.makeText(context, "Login Successful:${it.data}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.dasbordFragment)
                 }
 
             }
