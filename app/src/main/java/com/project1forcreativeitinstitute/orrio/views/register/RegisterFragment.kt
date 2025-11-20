@@ -1,29 +1,27 @@
 package com.project1forcreativeitinstitute.orrio.views.register
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.project1forcreativeitinstitute.orrio.R
-import com.project1forcreativeitinstitute.orrio.databinding.FragmentLoginBinding
+import com.project1forcreativeitinstitute.orrio.base.BaseFragment
+import com.project1forcreativeitinstitute.orrio.core.DataState
+import com.project1forcreativeitinstitute.orrio.data.models.UserRegistration
 import com.project1forcreativeitinstitute.orrio.databinding.FragmentRegisterBinding
 import com.project1forcreativeitinstitute.orrio.isEmpty
+import dagger.hilt.android.AndroidEntryPoint
 
-class RegisterFragment : Fragment() {
-    lateinit var binding: FragmentRegisterBinding
+@AndroidEntryPoint
+class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
+
+    private val viewModel: RegistrationViewModel
+    by viewModels ()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        setListener()
-        return binding.root
-    }
-    private fun setListener() {
+
+    override fun setListener() {
+
         with(binding) {
             btnLogin.setOnClickListener {
                 etName.isEmpty()
@@ -31,9 +29,52 @@ class RegisterFragment : Fragment() {
                 etPassword.isEmpty()
                 if (!etName.isEmpty() && !etEmail.isEmpty() && !etPassword.isEmpty()) {
                     Toast.makeText(context, "All Input done....", Toast.LENGTH_LONG).show()
+
+                    val user = UserRegistration(
+                  etName.text.toString(),
+                  etEmail.text.toString(),
+                  etPassword.text.toString(),
+                  "Seller",
+                  ""
+              )
+              viewModel.userRegistration(user)
+
                 }
 
             }
+            btnLogin.setOnClickListener {
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
     }
+
+    override fun allObserver() {
+        registrationResponse()
+    }
+
+
+
+
+
+    private fun registrationResponse() {
+
+        viewModel.registrationResponse.observe(viewLifecycleOwner){
+            when(it) {
+                is DataState.Error ->{
+                    loading.dismiss()
+                    Toast.makeText(context,it.message, Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Loading->{
+                    loading.show()
+                    Toast.makeText(context,"Loading....", Toast.LENGTH_SHORT).show()
+                }
+                is DataState.Success -> {
+                    loading.dismiss()
+                    Toast.makeText(context,"created User : ${it.data}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+    }
+
 }

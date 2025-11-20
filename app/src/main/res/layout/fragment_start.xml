@@ -9,11 +9,14 @@
     android:orientation="vertical"
     tools:context=".views.starter.StartFragment">
 
-    <ImageView
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher_foreground" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        app:lottie_rawRes="@raw/json1"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:layout_gravity="center"/>
 
 
     <TextView

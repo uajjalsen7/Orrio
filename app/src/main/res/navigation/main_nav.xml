@@ -48,5 +48,5 @@
         android:id="@+id/dasbordFragment"
         android:name="com.project1forcreativeitinstitute.orrio.views.dashbord.DasbordFragment"
         android:label="fragment_dasbord"
-        tools:layout="@layout/fragment_dasbord" />
+        tools:layout="@layout/fragment_dashbord" />
 </navigation>
