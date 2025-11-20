@@ -15,15 +15,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
-    private val viewModel: RegistrationViewModel
-    by viewModels ()
-
-
+    private val viewModel: RegistrationViewModel by viewModels ()
 
     override fun setListener() {
 
         with(binding) {
-            btnLogin.setOnClickListener {
+
+            btnRegister.setOnClickListener {
                 etName.isEmpty()
                 etEmail.isEmpty()
                 etPassword.isEmpty()
@@ -35,9 +33,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                   etEmail.text.toString(),
                   etPassword.text.toString(),
                   "Seller",
-                  ""
-              )
-              viewModel.userRegistration(user)
+                  "")
+                viewModel.userRegistration(user)
 
                 }
 
