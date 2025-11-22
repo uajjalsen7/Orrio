@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.project1forcreativeitinstitute.orrio.base
 
 import android.app.ProgressDialog
@@ -10,16 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import java.util.zip.Inflater
-
 @Suppress("DEPRECATION")
 abstract class BaseFragment<VB : ViewBinding>(
-    private val  bindingInflater: (Inflater: LayoutInflater)->VB
+    private val  bindingInflater: (inflater: LayoutInflater)->VB
 ): Fragment() {
     private var _binding:VB? = null
-
     val binding:VB
         get()= _binding as VB
-
     lateinit var loading: ProgressDialog
 
     override fun onCreateView(

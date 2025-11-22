@@ -1,4 +1,4 @@
-package com.project1forcreativeitinstitute.orrio
+package com.project1forcreativeitinstitute.orrio.views
 
 import android.widget.EditText
 

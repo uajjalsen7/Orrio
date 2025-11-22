@@ -17,17 +17,23 @@ class RegistrationViewModel @Inject constructor(
 )  : ViewModel() {
 
    private val _registrtionResponse = MutableLiveData<DataState<UserRegistration>>()
-
     val registrationResponse : LiveData<DataState<UserRegistration>> = _registrtionResponse
-
-
     fun userRegistration(user: UserRegistration){
-
         _registrtionResponse.postValue(DataState.Loading())
-
         authService.userRegistration(user).addOnSuccessListener {
-            _registrtionResponse.postValue(DataState.Success(user))
-            Log.d("TAG", "userRegistration: Success")
+            it.user?.let { createdUser->
+                user.userID =createdUser.uid
+
+                authService.createUser(user).addOnSuccessListener {
+                    _registrtionResponse.postValue(DataState.Success(user))
+                    Log.d("TAG", "userRegistration: Success")
+                }.addOnFailureListener {error->
+
+                    _registrtionResponse.postValue(DataState.Error("${error.message}"))
+                    Log.d("TAG", "userRegistration: ${error.message}")
+
+                }
+            }
 
         }.addOnFailureListener { error->
             _registrtionResponse.postValue(DataState.Error("${error.message}"))

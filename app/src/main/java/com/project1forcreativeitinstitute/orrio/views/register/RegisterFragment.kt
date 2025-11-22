@@ -1,6 +1,7 @@
 package com.project1forcreativeitinstitute.orrio.views.register
 
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -9,7 +10,8 @@ import com.project1forcreativeitinstitute.orrio.base.BaseFragment
 import com.project1forcreativeitinstitute.orrio.core.DataState
 import com.project1forcreativeitinstitute.orrio.data.models.UserRegistration
 import com.project1forcreativeitinstitute.orrio.databinding.FragmentRegisterBinding
-import com.project1forcreativeitinstitute.orrio.isEmpty
+import com.project1forcreativeitinstitute.orrio.views.dashboard.seller.SellerDashboard
+import com.project1forcreativeitinstitute.orrio.views.isEmpty
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +69,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 }
                 is DataState.Success -> {
                     loading.dismiss()
-                    Toast.makeText(context,"created User : ${it.data}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "created User : ${it.data}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireContext(), SellerDashboard::class.java))
+                    requireActivity().finish()
                 }
             }
         }

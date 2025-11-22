@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.Orrio" parent="Base.Theme.Orrio" />
+    <style name="Theme.Orrio.App.Bar" parent="Theme.Material3.DayNight"/>
 </resources>

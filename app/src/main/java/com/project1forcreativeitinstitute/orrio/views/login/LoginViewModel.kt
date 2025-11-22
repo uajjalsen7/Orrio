@@ -10,6 +10,8 @@ import com.project1forcreativeitinstitute.orrio.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 
+
+
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authService: AuthRepository
@@ -18,16 +20,16 @@ class LoginViewModel @Inject constructor(
     private val _loginResponse= MutableLiveData<DataState<UserLogIn>>()
     val loginResponse : LiveData<DataState<UserLogIn>> =_loginResponse
 
-    fun userLogin(userLogin: UserLogIn){
+    fun userLogin(user: UserLogIn){
         _loginResponse.postValue(DataState.Loading())
 
-        authService.userLogin(userLogin).addOnSuccessListener {
-            _loginResponse.postValue(DataState.Success(userLogin))
+        authService.userLogin(user).addOnSuccessListener {
+            _loginResponse.postValue(/* value = */ DataState.Success(user))
             Log.d("TAG", "userLogin: Success ")
 
-        }.addOnFailureListener {
-            _loginResponse.postValue(DataState.Error("${it.message}"))
-            Log.d("TAG", "userLogin:${it.message} ")
+        }.addOnFailureListener {error->
+            _loginResponse.postValue(DataState.Error("${error.message}"))
+            Log.d("TAG", "userLogin:${error.message} ")
         }
     }
 }
