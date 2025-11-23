@@ -51,6 +51,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
                 is DataState.Success -> {
                     loading.dismiss()
+                    Toast.makeText(context, "Login Successful:${it.data}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.dashBoardFragment)
                     Toast.makeText(context,"User logged in : ${it.data}",Toast.LENGTH_SHORT).show()
                     startActivity(Intent(requireContext(), SellerDashboard::class.java))
                     requireActivity().finish()
