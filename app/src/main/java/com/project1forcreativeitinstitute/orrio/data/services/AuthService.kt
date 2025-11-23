@@ -8,6 +8,8 @@ import com.project1forcreativeitinstitute.orrio.data.models.UserRegistration
 interface AuthService {
 
     fun userRegistration(user: UserRegistration): Task<AuthResult>
-    fun userLogin(user: UserLogIn): Task<AuthResult?>
+
+    fun userLogin(user: UserLogIn): Task<AuthResult>
+
     fun createUser(user: UserRegistration)
 }

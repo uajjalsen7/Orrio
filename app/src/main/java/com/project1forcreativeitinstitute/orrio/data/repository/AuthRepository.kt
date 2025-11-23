@@ -16,7 +16,7 @@ class AuthRepository @Inject constructor(
         return jAuth.createUserWithEmailAndPassword(user.email, user.password)
     }
 
-    override fun userLogin(user: UserLogIn): Task<AuthResult?> {
+    override fun userLogin(user: UserLogIn): Task<AuthResult> {
 
         return jAuth.signInWithEmailAndPassword(user.email,user.password)
 

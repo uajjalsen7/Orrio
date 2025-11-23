@@ -49,7 +49,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
         registrationResponse()
     }
 
-
     private fun registrationResponse() {
 
         viewModel.registrationResponse.observe(viewLifecycleOwner){
