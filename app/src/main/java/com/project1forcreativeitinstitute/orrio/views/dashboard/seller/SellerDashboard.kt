@@ -35,13 +35,13 @@ class SellerDashboard : AppCompatActivity() {
         setContentView(binding.root)
         navController = findNavController(R.id.fragmentContainerView2)
 
-        val appBarconfig = AppBarConfiguration(setOf(
+        val appBarConfig = AppBarConfiguration(setOf(
             R.id.myProductFragment,
             R.id.uploadProductFragment,
             R.id.sellerProfileFragment,
         ))
         binding.bottomNavigationView.setupWithNavController(navController)
-        setupActionBarWithNavController(navController,appBarconfig)
+        setupActionBarWithNavController(navController,appBarConfig)
 
         }
 

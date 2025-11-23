@@ -27,7 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 etEmail.isEmpty()
                 etPassword.isEmpty()
                 if (!etEmail.isEmpty() && !etPassword.isEmpty()){
-//                    Toast.makeText(context, "All input done...", Toast.LENGTH_LONG).show()
+                  Toast.makeText(context, "All input done...", Toast.LENGTH_LONG).show()
                     val user = UserLogIn(etEmail.text.toString(), etPassword.text.toString())
                     viewModel.userLogin(user)
                     loading.show()
