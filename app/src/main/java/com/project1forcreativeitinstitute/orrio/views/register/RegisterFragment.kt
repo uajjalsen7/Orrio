@@ -50,9 +50,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
     }
 
 
-
-
-
     private fun registrationResponse() {
 
         viewModel.registrationResponse.observe(viewLifecycleOwner){
@@ -68,6 +65,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterB
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context,"created User : ${it.data}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.dashBoardFragment)
                 }
             }
         }

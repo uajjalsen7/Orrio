@@ -23,14 +23,14 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_dasbordFragment"
-            app:destination="@id/dasbordFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -38,15 +38,15 @@
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_registerFragment_to_dasbordFragment"
-            app:destination="@id/dasbordFragment" />
-        <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
     </fragment>
     <fragment
-        android:id="@+id/dasbordFragment"
-        android:name="com.project1forcreativeitinstitute.orrio.views.dashbord.DasbordFragment"
-        android:label="fragment_dasbord"
-        tools:layout="@layout/fragment_dashbord" />
+        android:id="@+id/dashBoardFragment"
+        android:name="com.project1forcreativeitinstitute.orrio.views.dashbord.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" />
 </navigation>

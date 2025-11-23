@@ -62,7 +62,7 @@ import kotlin.math.log
                 is DataState.Success -> {
                     loading.dismiss()
                     Toast.makeText(context, "Login Successful:${it.data}", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.dasbordFragment)
+                    findNavController().navigate(R.id.dashBoardFragment)
                 }
 
             }
