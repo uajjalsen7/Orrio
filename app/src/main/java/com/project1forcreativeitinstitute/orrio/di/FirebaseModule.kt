@@ -1,6 +1,7 @@
 package com.project1forcreativeitinstitute.orrio.di
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.project1forcreativeitinstitute.orrio.data.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
@@ -18,8 +19,13 @@ class FirebaseModule {
 }
     @Provides
     @Singleton
-    fun providesFirebase(jAuth: FirebaseAuth): AuthRepository {
-        return AuthRepository(jAuth)
+    fun providesFirebaseFireStoreDB(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
+    @Provides
+    @Singleton
+    fun providesFirebase(jAuth: FirebaseAuth,db: FirebaseFirestore): AuthRepository {
+        return AuthRepository(jAuth,db)
     }
 
 }
